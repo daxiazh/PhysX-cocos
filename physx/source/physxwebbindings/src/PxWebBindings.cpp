@@ -993,7 +993,12 @@ EMSCRIPTEN_BINDINGS(physx) {
           "getWorldBounds",
           optional_override([](PxShape &shape, PxRigidActor &actor, float i) {
             return PxShapeExt::getWorldBounds(shape, actor, i);
-          }));
+          }))
+      .function("setContactOffset", &PxShape::setContactOffset)
+      .function("getContactOffset", &PxShape::getContactOffset)
+      .function("setRestOffset", &PxShape::setRestOffset)
+      .function("getRestOffset", &PxShape::getRestOffset)
+      ;
 
   class_<PxPhysics>("PxPhysics")
       .function("release", &PxPhysics::release)
@@ -1247,7 +1252,14 @@ EMSCRIPTEN_BINDINGS(physx) {
                                                                  NULL, false);
                 }))
       .function("setMassSpaceInertiaTensor",
-                &PxRigidBody::setMassSpaceInertiaTensor);
+                &PxRigidBody::setMassSpaceInertiaTensor)
+      .function("setMaxAngularVelocity", &PxRigidBody::setMaxAngularVelocity)
+      .function("getMaxAngularVelocity", &PxRigidBody::getMaxAngularVelocity)
+      .function("setMaxLinearVelocity", &PxRigidBody::setMaxLinearVelocity)
+      .function("getMaxLinearVelocity", &PxRigidBody::getMaxLinearVelocity)
+      .function("setMaxDepenetrationVelocity", &PxRigidBody::setMaxDepenetrationVelocity)
+      .function("getMaxDepenetrationVelocity", &PxRigidBody::getMaxDepenetrationVelocity)
+      ;
 
   class_<PxRigidBodyFlags>("PxRigidBodyFlags");
   enum_<PxRigidBodyFlag::Enum>("PxRigidBodyFlag")
