@@ -20,7 +20,7 @@ jobs:
       - name: Check Engine Externals Repo
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.ENGINE_EXTERNAL_REPO_TOKEN }}
+          # token: ${{ secrets.ENGINE_EXTERNAL_REPO_TOKEN }}
           repository: cocos/cocos-engine-external
           ref: ${{ inputs.dest_branch }}
           path: external
@@ -77,21 +77,3 @@ jobs:
           cp physx/phy.d.ts "$targetOutPath/phy.d.ts"
           cp physx/PhysX.d.ts "$targetOutPath/physx.d.ts"
       
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.ENGINE_EXTERNAL_REPO_TOKEN }}
-          path: external
-          branch: auto/update-physx
-          base: ${{ inputs.dest_branch }}
-          add-paths:
-            emscripten/physx/*.*
-          commit-message: |
-            automated change: update PhysX dependency cocos/PhysX@${{ steps.set_physx_info.outputs.TARGET_PHYSX_REF }}
-          title: |
-            Update PhysX emscripten dependency
-          body: |
-            This PR updates PhysX emscripten dependency.
-            
-            Target PhysX source is cocos/PhysX@${{ steps.set_physx_info.outputs.TARGET_PHYSX_REF }}.
-          branch-suffix: timestamp
