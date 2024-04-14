@@ -80,7 +80,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
-          # token: ${{ secrets.ENGINE_EXTERNAL_REPO_TOKEN }}
+          token: ${{ secrets.ENGINE_EXTERNAL_REPO_TOKEN }}
           path: external
           branch: auto/update-physx
           base: ${{ inputs.dest_branch }}
